@@ -42,6 +42,7 @@ export default function LoginPage() {
       toast("You have been logged in successfully")
     } catch (error) {
       toast("Please check your credentials and try again")
+      console.log(error)
     } finally {
       setIsLoading(false)
     }

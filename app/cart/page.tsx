@@ -53,7 +53,7 @@ export default function CartPage() {
               <div className="flex flex-col items-center gap-4">
                 <ShoppingBag className="w-12 h-12 text-muted-foreground" />
                 <h2 className="text-2xl font-semibold">Your cart is empty</h2>
-                <p className="text-muted-foreground">Looks like you haven't added anything to your cart yet.</p>
+                <p className="text-muted-foreground">Looks like you havent added anything to your cart yet.</p>
                 <Button asChild>
                   <Link href="/">Browse Products</Link>
                 </Button>
