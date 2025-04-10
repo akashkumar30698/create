@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { useAuth } from "@/components/auth-provider"
-import { useCart } from "@/components/cart-provider"
-import { useToast } from "@/components/ui/use-toast"
+import { useAuth } from "../../components/auth-provider"
+import { useCart } from "../../components/cart-provider"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Star } from "lucide-react"
@@ -28,7 +28,6 @@ export default function ProductDetailPage() {
   const router = useRouter()
   const { user } = useAuth()
   const { addToCart } = useCart()
-  const { toast } = useToast()
   const [product, setProduct] = useState<Product | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -43,11 +42,7 @@ export default function ProductDetailPage() {
         setProduct(data)
       } catch (error) {
         console.error("Error fetching product:", error)
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Failed to load product details",
-        })
+        toast("Failed to load product details")
       } finally {
         setIsLoading(false)
       }
@@ -59,10 +54,7 @@ export default function ProductDetailPage() {
   const handleAddToCart = () => {
     if (product) {
       addToCart(product)
-      toast({
-        title: "Added to cart",
-        description: `${product.title} has been added to your cart`,
-      })
+      toast( `${product.title} has been added to your cart`)
     }
   }
 

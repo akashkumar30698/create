@@ -3,19 +3,18 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useAuth } from "@/components/auth-provider"
+import { useAuth } from "../components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { useToast } from "@/components/ui/use-toast"
+import { toast } from "sonner"
 
 export default function LoginPage() {
   const [username, setUsername] = useState("mor_2314")
   const [password, setPassword] = useState("83r5^_")
   const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth()
-  const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -40,16 +39,9 @@ export default function LoginPage() {
       const data = await response.json()
       login(data.token)
 
-      toast({
-        title: "Login successful",
-        description: "You have been logged in successfully",
-      })
+      toast("You have been logged in successfully")
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Login failed",
-        description: "Please check your credentials and try again",
-      })
+      toast("Please check your credentials and try again")
     } finally {
       setIsLoading(false)
     }
