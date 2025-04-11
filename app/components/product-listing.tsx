@@ -20,6 +20,9 @@ type Product = {
   image: string
 }
 
+type CartItem = Product & { quantity: number }
+
+
 export default function ProductListing() {
   const { user } = useAuth()
   const { addToCart } = useCart()
@@ -84,7 +87,9 @@ export default function ProductListing() {
   }, [selectedCategory, searchQuery, products])
 
   const handleAddToCart = (product: Product) => {
-    addToCart(product)
+    const cartItem: CartItem = { ...product, quantity: 1 } // Default quantity
+
+    addToCart(cartItem)
     toast(`${product.title} has been added to your cart`)
   }
 
