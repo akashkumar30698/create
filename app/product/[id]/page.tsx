@@ -23,6 +23,9 @@ type Product = {
   }
 }
 
+type CartItem = Product & { quantity: number }
+
+
 export default function ProductDetailPage() {
   const { id } = useParams()
   const router = useRouter()
@@ -53,7 +56,8 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product)
+      const cartItem: CartItem = { ...product, quantity: 1 } // Default quantity
+      addToCart(cartItem)
       toast( `${product.title} has been added to your cart`)
     }
   }
